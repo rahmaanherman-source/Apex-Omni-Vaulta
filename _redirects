@@ -1,0 +1,5 @@
+# Force HTTPS — Netlify / Cloudflare Pages
+http://apexlifeglobal.com/*  https://apexlifeglobal.com/:splat  301!
+
+# SPA fallback
+/*  /index.html  200

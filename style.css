@@ -1,0 +1,414 @@
+/* ============================================================
+   APEX OMNI VAULT — Premium Dark Theme
+   Zero dependencies. Zero bloat.
+   ============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-base:    #0A0E2A;
+  --bg-card:    #111827;
+  --bg-hover:   #1f2937;
+  --border:     #1f2937;
+  --gold:       #facc15;
+  --gold-dark:  #f59e0b;
+  --text:       #E2E8F0;
+  --text-muted: #94a3b8;
+  --text-dim:   #9ca3af;
+  --green:      #22c55e;
+  --red:        #ef4444;
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --shadow-gold: 0 0 40px rgba(250, 204, 21, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ─── SCROLLBAR ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #374151; }
+
+/* ─── AUTH OVERLAY ─────────────────────────────────────────── */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 42, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-xl);
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 92%;
+  text-align: center;
+  box-shadow: var(--shadow-gold);
+  animation: slideUp 0.4s ease;
+}
+
+.auth-logo {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.auth-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.auth-btn {
+  background: var(--gold);
+  color: var(--bg-base);
+  border: none;
+  padding: 13px 36px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.03em;
+}
+
+.auth-btn:hover  { background: var(--gold-dark); transform: scale(1.03); }
+.auth-btn:active { transform: scale(0.98); }
+
+.auth-status {
+  margin-top: 18px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  min-height: 1.3em;
+  transition: color 0.3s;
+}
+
+/* ─── VAULT CONTAINER ──────────────────────────────────────── */
+.vault-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 3rem;
+}
+
+/* ─── HEADER ───────────────────────────────────────────────── */
+.vault-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.vault-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.04em;
+}
+
+.vault-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  background: #0f172a;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-weight: 600;
+}
+
+.lane-badge {
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 4px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background 0.2s, color 0.2s;
+}
+.logout-btn:hover { background: var(--red); color: #fff; }
+
+/* ─── OPERATOR PANEL ───────────────────────────────────────── */
+.operator-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .operator-panel { grid-template-columns: 1fr; }
+}
+
+.panel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.panel-card:hover { border-color: rgba(250, 204, 21, 0.3); }
+
+.panel-heading {
+  color: var(--gold);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.metric { display: flex; flex-direction: column; gap: 2px; }
+.metric .label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.metric .value { font-size: 1.4rem; font-weight: 600; }
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.action-btn {
+  background: var(--bg-hover);
+  border: none;
+  color: var(--text);
+  padding: 10px 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.action-btn:hover  { background: #374151; }
+.action-btn:active { transform: scale(0.97); }
+
+/* ─── TOOLBAR (SEARCH + FILTERS) ───────────────────────────── */
+.vault-toolbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.vault-search {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-size: 0.9rem;
+  padding: 10px 16px;
+  width: 100%;
+  max-width: 360px;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.vault-search::placeholder { color: var(--text-dim); }
+.vault-search:focus { border-color: var(--gold); }
+
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.filter-btn:hover  { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active {
+  background: rgba(250, 204, 21, 0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ─── VAULT LINK GRID ──────────────────────────────────────── */
+.vault-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.vault-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+  list-style: none;
+}
+
+.vault-item:hover {
+  background: var(--bg-hover);
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+
+.vault-item a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: block;
+  word-break: break-word;
+}
+.vault-item a:hover { text-decoration: underline; }
+
+.vault-item .cat-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vault-item .desc {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+
+.vault-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 2rem 0;
+}
+
+/* ─── DIAGRAM SECTION ──────────────────────────────────────── */
+.diagram-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+}
+
+.diagram-heading {
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.mermaid {
+  background: var(--bg-base);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  min-height: 60px;
+}
+
+/* ─── FOOTER ───────────────────────────────────────────────── */
+.vault-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── ANIMATIONS ───────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .vault-container { padding: 1rem; }
+  .vault-title { font-size: 1.5rem; }
+  .vault-links { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .auth-card { padding: 32px 24px; }
+  .auth-title { font-size: 1.6rem; }
+  .vault-header { flex-direction: column; align-items: flex-start; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── PRINT ────────────────────────────────────────────────── */
+@media print {
+  .auth-overlay, .vault-controls, .operator-panel, .vault-toolbar, .diagram-section { display: none; }
+  body { background: #fff; color: #000; }
+  .vault-item a { color: #000; }
+}

@@ -216,3 +216,36 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+package-lock.json
+yarn.lock
+.npm
+
+# Build output
+dist/
+out/
+.next/
+.nuxt/
+.output/
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Deployment caches
+.vercel
+.netlify
+.cloudflare
