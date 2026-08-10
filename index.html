@@ -13,62 +13,40 @@
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
 </head>
 <body>
-
-  <!-- ═══════════════════════════════════════
-       GATEKEEPER AUTH OVERLAY
-  ═══════════════════════════════════════ -->
   <div id="auth-overlay" class="auth-overlay" role="dialog" aria-modal="true" aria-label="Gatekeeper Authentication">
     <div class="auth-card">
       <div class="auth-logo">🔱</div>
       <h1 class="auth-title">GATEKEEPER</h1>
       <p class="auth-sub">Apex Omni Vault — Sovereign Access Control</p>
-      <button id="auth-btn" class="auth-btn" type="button">Authenticate</button>
+      <button id="auth-btn" class="auth-btn" type="button">Check Authentication</button>
       <div id="auth-status" class="auth-status" role="status" aria-live="polite">
-        Waiting for authentication…
+        Waiting for a connected APEX authentication provider…
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       MAIN VAULT (hidden until authenticated)
-  ═══════════════════════════════════════ -->
   <div id="vault-container" class="vault-container" hidden>
-
-    <!-- Header -->
     <header class="vault-header">
       <span class="vault-title">🔱 APEX OMNI VAULT</span>
       <div class="vault-controls">
-        <span id="vault-status" class="status-badge">● ONLINE</span>
-        <span id="user-lane-badge" class="lane-badge">OWNER</span>
+        <span id="vault-status" class="status-badge">● CONNECTION STATE UNKNOWN</span>
+        <span id="user-lane-badge" class="lane-badge">GUEST</span>
         <button id="logout-btn" class="logout-btn" type="button">Logout</button>
       </div>
     </header>
 
-    <!-- Operator Panel -->
     <section class="operator-panel" aria-label="Operator Panel">
       <div class="panel-card">
         <h2 class="panel-heading">System Health</h2>
         <div class="metric-grid">
-          <div class="metric">
-            <span class="label">Uptime</span>
-            <span class="value" id="uptime">99.99%</span>
-          </div>
-          <div class="metric">
-            <span class="label">Requests</span>
-            <span class="value" id="requests">—</span>
-          </div>
-          <div class="metric">
-            <span class="label">Active Sessions</span>
-            <span class="value" id="sessions">—</span>
-          </div>
-          <div class="metric">
-            <span class="label">Cache Hit</span>
-            <span class="value" id="cache">—</span>
-          </div>
+          <div class="metric"><span class="label">Uptime</span><span class="value" id="uptime">UNVERIFIED</span></div>
+          <div class="metric"><span class="label">Requests</span><span class="value" id="requests">UNVERIFIED</span></div>
+          <div class="metric"><span class="label">Active Sessions</span><span class="value" id="sessions">UNVERIFIED</span></div>
+          <div class="metric"><span class="label">Cache Hit</span><span class="value" id="cache">UNVERIFIED</span></div>
         </div>
       </div>
       <div class="panel-card">
-        <h2 class="panel-heading">Quick Actions</h2>
+        <h2 class="panel-heading">Execution Providers</h2>
         <div class="action-grid">
           <button class="action-btn" type="button" data-action="deploy">🚀 Deploy</button>
           <button class="action-btn" type="button" data-action="restart">🔄 Restart</button>
@@ -78,28 +56,18 @@
       </div>
     </section>
 
-    <!-- Search & Filter Bar -->
     <div class="vault-toolbar">
-      <input
-        id="vault-search"
-        class="vault-search"
-        type="search"
-        placeholder="Search vault…"
-        aria-label="Search vault links"
-        autocomplete="off"
-      />
+      <input id="vault-search" class="vault-search" type="search" placeholder="Search vault…" aria-label="Search vault links" autocomplete="off" />
       <div class="category-filters" id="category-filters" role="group" aria-label="Filter by category">
         <button class="filter-btn active" data-cat="all" type="button">All</button>
       </div>
     </div>
 
-    <!-- Link Grid -->
     <main>
       <div id="vault-links" class="vault-links" role="list"></div>
       <p id="vault-empty" class="vault-empty" hidden>No results found.</p>
     </main>
 
-    <!-- Architecture Diagram -->
     <section class="diagram-section" aria-label="Architecture Diagram">
       <h2 class="diagram-heading">📐 Ecosystem Architecture</h2>
       <div class="mermaid" id="arch-diagram">
@@ -120,10 +88,9 @@ graph TD
     </section>
 
     <footer class="vault-footer">
-      <p>Apex Omni Vault &copy; <span id="footer-year"></span> &nbsp;·&nbsp; Luxury, Secured Power. Undeniable Prestige.</p>
+      <p>Apex Omni Vault &copy; <span id="footer-year"></span> &nbsp;·&nbsp; One Tab. One System. One Standard.</p>
     </footer>
-
-  </div><!-- /#vault-container -->
+  </div>
 
   <script src="gatekeeper.js"></script>
   <script src="vault.js"></script>
