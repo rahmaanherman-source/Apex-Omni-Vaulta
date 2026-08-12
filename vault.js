@@ -1,6 +1,51 @@
-// APEX OMNI VAULT — capital-first ecosystem registry
-// Canonical registry layer for APEX Hub + Gabby.
-// Keep links/actions centralized here; secrets belong in Vault/Gatekeeper, never in this file.
+// APEX OMNI VAULT — canonical ecosystem registry
+// Canonical service name: OMNI VAULT
+// The GitHub repository slug may temporarily differ during a rename migration.
+// Secrets belong in Vault/Gatekeeper, never in this file.
+
+const APEX_IDENTITY = {
+  canonicalName: "OMNI VAULT",
+  canonicalRepositoryName: "Apex-Omni-Vault",
+  canonicalRepositoryUrl: "https://github.com/rahmaanherman-source/Apex-Omni-Vault",
+  aliases: [
+    "Omni Vault",
+    "Apex Omni Vault",
+    "Apex-Omni-Vault",
+    "Apex-Omni-Vaulta",
+    "Omni Vaulta",
+    "Omni Volta"
+  ]
+};
+
+// Identity resolver: recognize the intended service even when an existing
+// repository/destination still carries a legacy or mistyped slug.
+function resolveApexIdentity(candidate = {}) {
+  const values = [
+    candidate.name,
+    candidate.serviceName,
+    candidate.repositoryName,
+    candidate.repositoryUrl,
+    candidate.url
+  ].filter(Boolean).map(String).map(value => value.trim().toLowerCase());
+
+  const canonical = [
+    APEX_IDENTITY.canonicalName,
+    APEX_IDENTITY.canonicalRepositoryName,
+    APEX_IDENTITY.canonicalRepositoryUrl,
+    ...APEX_IDENTITY.aliases
+  ].map(value => value.toLowerCase());
+
+  const matched = values.some(value => canonical.includes(value));
+  return matched
+    ? {
+        matched: true,
+        canonicalName: APEX_IDENTITY.canonicalName,
+        canonicalRepositoryName: APEX_IDENTITY.canonicalRepositoryName,
+        canonicalRepositoryUrl: APEX_IDENTITY.canonicalRepositoryUrl,
+        reason: "canonical-name-or-known-alias"
+      }
+    : { matched: false };
+}
 
 const vaultRegistry = [
   // CORE — CONTROL PLANE
@@ -8,7 +53,7 @@ const vaultRegistry = [
   { name: "Gabby", url: "https://github.com/rahmaanherman-source/Apex-Gabby-", category: "core", purpose: "Verified AI operator" },
   { name: "APEX Terminal", url: "https://github.com/rahmaanherman-source/APEX-TERMINAL", category: "core", purpose: "Command and execution layer" },
   { name: "Apex Bridge", url: "https://github.com/rahmaanherman-source/Apex-Bridge", category: "core", purpose: "Integration bridge" },
-  { name: "Apex Omni Vault", url: "https://github.com/rahmaanherman-source/Apex-Omni-Vault", category: "core", purpose: "Canonical ecosystem registry" },
+  { name: APEX_IDENTITY.canonicalName, url: APEX_IDENTITY.canonicalRepositoryUrl, category: "core", purpose: "Canonical ecosystem registry", identity: APEX_IDENTITY },
 
   // SECURITY / TRUTH
   { name: "Gatekeeper", url: "https://apexlifeglobal.com/gatekeeper", category: "security", purpose: "Access and authorization" },
@@ -57,9 +102,15 @@ const vaultLinks = document.getElementById("vault-links");
 vaultRegistry.forEach(item => {
   const div = document.createElement("div");
   div.className = `vault-item ${item.category}`;
+  const resolved = resolveApexIdentity(item);
+  const identityBadge = resolved.matched ? " <span class=\"identity-badge\">CANONICAL</span>" : "";
   div.innerHTML = `
-    <a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.name}</a>
+    <a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.name}${identityBadge}</a>
     <div class="desc">${item.purpose}</div>
   `;
   vaultLinks.appendChild(div);
 });
+
+// Expose a safe, non-secret resolver for APEX Hub/Gabby integrations.
+window.APEX_IDENTITY = Object.freeze(APEX_IDENTITY);
+window.resolveApexIdentity = resolveApexIdentity;
