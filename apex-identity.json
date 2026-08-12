@@ -1,0 +1,23 @@
+{
+  "canonical": {
+    "serviceName": "OMNI VAULT",
+    "repositoryName": "Apex-Omni-Vault",
+    "repositoryUrl": "https://github.com/rahmaanherman-source/Apex-Omni-Vault",
+    "owner": "rahmaanherman-source"
+  },
+  "aliases": [
+    "Omni Vault",
+    "Apex Omni Vault",
+    "Apex-Omni-Vault",
+    "Apex-Omni-Vaulta",
+    "Omni Vaulta",
+    "Omni Volta"
+  ],
+  "resolution": {
+    "rule": "canonical-name-first",
+    "repositorySlugMismatchAllowed": true,
+    "matchBy": ["repositoryId", "repositoryUrl", "canonicalName", "alias"],
+    "neverCreateDuplicateRepository": true,
+    "neverExposeSecrets": true
+  }
+}
